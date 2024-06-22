@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth')->except((['index', 'show']));
+        $this->authorizeResource(Listing::class, 'listing');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -16,7 +22,7 @@ class ListingController extends Controller
             'Listing/Index',[
                 'listings'=> Listing::all()
             ]
-            );
+        );
     }
 
     /**
@@ -24,9 +30,7 @@ class ListingController extends Controller
      */
     public function create()
     {
-        return inertia(
-            'Listing/Create'
-        );
+        return inertia('Listing/Create');
     }
 
     /**
@@ -50,9 +54,9 @@ class ListingController extends Controller
             'neighbourhood.regex' => 'The neighbourhood field must contain only letters and spaces.',
             'street.regex' => 'The street field must contain only letters and spaces.',
         ]);
-        
-        $form['user_id']=auth()->id();
-        
+
+        $form['user_id'] = auth()->id();
+
         Listing::create($form);
 
         return redirect('/listings')->with('success', 'Listing was created successfully');
@@ -63,11 +67,9 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
-        return inertia(
-            'Listing/Show',[
-                'listing'=> $listing
-            ]
-        );
+        return inertia('Listing/Show', [
+            'listing' => $listing
+        ]);
     }
 
     /**
@@ -75,11 +77,9 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing)
     {
-        return inertia(
-            'Listing/Edit',[
-                'listing'=> $listing
-            ]
-        );
+        return inertia('Listing/Edit', [
+            'listing' => $listing
+        ]);
     }
 
     /**
@@ -103,8 +103,7 @@ class ListingController extends Controller
             'neighbourhood.regex' => 'The neighbourhood field must contain only letters and spaces.',
             'street.regex' => 'The street field must contain only letters and spaces.',
         ]);
-        
-        
+
         $listing->update($form);
 
         return redirect('/listings')->with('success', 'Listing was updated successfully');
@@ -116,6 +115,6 @@ class ListingController extends Controller
     public function destroy(Listing $listing)
     {
         $listing->delete();
-        redirect()->back()->with('success', 'Listing was Deleted successfully');
+        return redirect()->back()->with('success', 'Listing was deleted successfully');
     }
 }
