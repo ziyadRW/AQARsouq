@@ -10,14 +10,23 @@
             <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                 <Link :href="route('listings.index')">AQARsouq</Link>
             </div>
-            <div class="text-lg font-medium">
-                <Link class="main-btn" :href="route('listings.create')">+ New listing</Link> &nbsp;
+            <div v-if="page.props.value.user" class="flex items-center gap-4 text-lg font-medium">
+                <div class="text-sm text-gray-500">
+                    {{ page.props.value.user.name }}
+                </div>
+                <div >
+                    <Link method="delete" as="button" :href="route('logout')">Logout</Link>
+                </div>
+                <Link  class="main-btn" :href="route('listings.create')">+ New listing</Link> &nbsp;
+            </div>
+            <div v-else>
+                    <Link :href="route('login')">Login</Link>
             </div>
         </nav>
     </div>
 </header>
 
-<main class="container mx-auto p-4">
+<main class="container mx-auto p-4 w-full">
     <div v-if="page.props.value.flash.success" class="mb-4 border rounded-md p-2 shadow-sm border-green-200 dark:border-green-800 bg-green-100 dark:bg-green-900">
         {{ page.props.value.flash.success }}
     </div>
