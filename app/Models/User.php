@@ -49,11 +49,16 @@ class User extends Authenticatable
     }
 
     // this will hash the password auto..
-    
+
     /* protected function password(): Attribute{
         return Attribute::make(
             get: fn ($value) => $value,
             set: fn ($value) => Hash::make($value)
         );
     } */
+
+    public function listings()
+    {
+        return $this->hasMany(Listing::class, 'user_id');
+    }
 }

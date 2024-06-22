@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Listing extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
+        
+    ///or add     Model::unguard();     to the boot()
+    
+/*     protected $fillable = [
         'headline',
         'beds',
         'baths',
@@ -19,6 +21,16 @@ class Listing extends Model
         'neighbourhood',
         'street',
         'description',
-        'price'
-    ];
+        'price',
+        'user_id'
+    ]; */
+
+    public function user(){
+        return $this->belongsTo(User::class , 'user_id');
+    }
+
+    //this one include a return type declaration
+/*     public function user(): belongsTo {
+        $this->belongsTo(User::class , 'user_id');
+    } */
 }

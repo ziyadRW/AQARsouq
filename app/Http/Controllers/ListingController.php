@@ -51,6 +51,7 @@ class ListingController extends Controller
             'street.regex' => 'The street field must contain only letters and spaces.',
         ]);
         
+        $form['user_id']=auth()->id();
         
         Listing::create($form);
 

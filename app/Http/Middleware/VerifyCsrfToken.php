@@ -13,8 +13,12 @@ class VerifyCsrfToken
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+    protected $except = [
+        '/logout'
+    ];
     public function handle(Request $request, Closure $next): Response
     {
         return $next($request);
     }
+
 }

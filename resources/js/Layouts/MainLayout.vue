@@ -23,7 +23,7 @@
                     <Link  class="main-btn" :href="route('listings.create')">+ New listing</Link> &nbsp;
                 </div>
             </div>
-            <div class="flex items-center gap-2" v-else>
+            <div class="flex items-center gap-3" v-else>
                     <Link :href="route('login')">Login</Link>
                     <Link :href="route('user.create')">Signup</Link>
             </div>
