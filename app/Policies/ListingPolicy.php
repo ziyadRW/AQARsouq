@@ -7,10 +7,21 @@ use App\Models\User;
 
 class ListingPolicy
 {
+
+    public function before(?User $user, $ability){
+        //you can also specify which ability want to allow for the admin
+        // $user->is_admin && ability == 'update'
+        if($user?->is_admin){
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+
+     // the "?" before the user skipes is so also guests are authorized
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -18,7 +29,7 @@ class ListingPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Listing $listing): bool
+    public function view(?User $user, Listing $listing): bool
     {
         return true;
     }
@@ -36,7 +47,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 
     /**
@@ -44,7 +55,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 
     /**
@@ -52,7 +63,7 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 
     /**
@@ -60,6 +71,6 @@ class ListingPolicy
      */
     public function forceDelete(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 }

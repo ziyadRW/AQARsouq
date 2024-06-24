@@ -10,17 +10,20 @@ class ListingController extends Controller
     public function __construct()
     {
         //$this->middleware('auth')->except((['index', 'show']));
+
+        // this will run $this->authorize('listing') auto for everyone
         $this->authorizeResource(Listing::class, 'listing');
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return inertia(
             'Listing/Index',[
-                'listings'=> Listing::all()
+                'filters'=> $request->only(['priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo']),
+                'listings'=> Listing::latest()->paginate(6)
             ]
         );
     }
