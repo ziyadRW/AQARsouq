@@ -17,9 +17,9 @@
             <div>
                 <Link :href="route('listings.edit', listing.id)">Edit</Link>
             </div>
-            <div>
+<!--             <div>
                 <Link method="delete" :href="route('listings.destroy', listing.id)">Delete</Link>
-            </div>
+            </div> -->
         </Box>
     </div>
         <div v-if="listings.data.length" class="w-full flex justify-center mt-4 mb-4">

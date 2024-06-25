@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('description');
             $table->unsignedInteger('price');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 
@@ -46,6 +47,7 @@ return new class extends Migration
                 'price',
                 'user_id'
             ]);
+            $table->dropSoftDeletes();
         });
     }
 };

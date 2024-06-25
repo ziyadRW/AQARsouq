@@ -12,16 +12,21 @@
             </div>
             <div v-if="page.props.value.user" class="flex items-center gap-4 text-lg font-medium">
                 <div class=" hidden sm:block text-sm text-gray-500">
-                    {{ page.props.value.user.name }}
+                    <Link class="hover:text-gray-800 dark:hover:text-gray-300" :href="route('realtor.listings.index')">
+                        {{ page.props.value.user.name }}'s Account
+                    </Link>
+                    
                 </div>
 
+                <div>
+                    <Link  class="main-btn" :href="route('listings.create')">+ New listing</Link> &nbsp;
+                </div>
+                
                 <div class="" >
                     <Link method="post" as="button" :href="route('logout')">Logout</Link>
                 </div>
                 
-                <div>
-                    <Link  class="main-btn" :href="route('listings.create')">+ New listing</Link> &nbsp;
-                </div>
+
             </div>
             <div class="flex items-center gap-3" v-else>
                     <Link :href="route('login')">Login</Link>
