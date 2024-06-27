@@ -99,4 +99,4 @@ class ListingController extends Controller
             'listings' => Auth::user()->listings,
         ]);
     }
-}
+};

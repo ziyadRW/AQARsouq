@@ -8,7 +8,7 @@ import '../css/app.css';
 createInertiaApp({
   resolve: name => {
     const [moduleName, pageName] = name.split('/');
-    const page = resolvePageComponent(`./Modules/${moduleName}/Resources/js/Pages/${pageName}.vue`, import.meta.glob('./Modules/**/Resources/js/Pages/**/*.vue'));
+    const page = resolvePageComponent(`../../Modules/${moduleName}/Resources/js/Pages/${pageName}.vue`, import.meta.glob('../../Modules/**/Resources/js/Pages/*.vue'));
     page.then(module => {
       module.default.layout = module.default.layout || MainLayout;
     });
