@@ -1,0 +1,15 @@
+{
+    "name": "User",
+    "alias": "user",
+    "description": "This module handles user management.",
+    "keywords": ["user", "authentication", "registration"],
+    "active": true,
+    "order": 100,
+    "providers": [
+        "Modules\\User\\Providers\\UserServiceProvider",
+        "Modules\\User\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

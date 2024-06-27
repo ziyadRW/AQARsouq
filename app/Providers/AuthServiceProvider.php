@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Listing;
-use App\Policies\ListingPolicy;
+use Modules\Listing\Entities\Listing;
+use Modules\Listing\Policies\ListingPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

@@ -1,0 +1,15 @@
+{
+    "name": "Listing",
+    "alias": "listing",
+    "description": "This module handles property listings.",
+    "keywords": ["listing", "property", "real estate"],
+    "active": true,
+    "order": 100,
+    "providers": [
+        "Modules\\Listing\\Providers\\ListingServiceProvider",
+        "Modules\\Listing\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
