@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Listing\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -16,24 +17,23 @@ class ListingController extends Controller
 {
     use AuthorizesRequests;
 
-    protected $createListingFeature;
-    protected $updateListingFeature;
-    protected $deleteListingFeature;
-    protected $showListingFeature;
-    protected $listListingsFeature;
-
     public function __construct(
-        CreateListingFeature $createListingFeature,
-        UpdateListingFeature $updateListingFeature,
-        DeleteListingFeature $deleteListingFeature,
-        ShowListingFeature $showListingFeature,
-        ListListingsFeature $listListingsFeature
+        protected CreateListingFeature $createListingFeature,
+        protected UpdateListingFeature $updateListingFeature,
+        protected DeleteListingFeature $deleteListingFeature,
+        protected ShowListingFeature $showListingFeature,
+        protected ListListingsFeature $listListingsFeature
     ) {
-        $this->createListingFeature = $createListingFeature;
-        $this->updateListingFeature = $updateListingFeature;
-        $this->deleteListingFeature = $deleteListingFeature;
-        $this->showListingFeature = $showListingFeature;
-        $this->listListingsFeature = $listListingsFeature;
+        // $this->authorizeResource(Listing::class, 'listing');
+    }
+
+    public function manage()
+    {
+        
+        logger()->info('Managing listings for user:', ['user' => Auth::user()]);
+        return inertia('Listing/Manage', [
+            'listings' => Auth::user()->listings,
+        ]);
     }
 
     public function index(Request $request)
@@ -49,6 +49,7 @@ class ListingController extends Controller
 
     public function create()
     {
+        logger()->info('Creating a new listing');
         return inertia('Listing/Create');
     }
 
@@ -62,12 +63,14 @@ class ListingController extends Controller
 
     public function show(Listing $listing)
     {
+        logger()->info('Showing listing:', ['listing' => $listing]);
         $listing = $this->showListingFeature->handle($listing->id);
-
+    
         return inertia('Listing/Show', [
             'listing' => $listing,
         ]);
     }
+    
 
     public function edit(Listing $listing)
     {
@@ -93,10 +96,5 @@ class ListingController extends Controller
         return redirect('/listings')->with('success', 'Listing was deleted successfully');
     }
 
-    public function manage()
-    {
-        return inertia('Listing/Manage', [
-            'listings' => Auth::user()->listings,
-        ]);
-    }
-};
+
+}

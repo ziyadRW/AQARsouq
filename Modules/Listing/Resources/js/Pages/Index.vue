@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         <Box v-for="listing in listings.data" :key="listing.id">
             <div>
-                <Link :href="route('listings.show', listing.id)">
+                <Link :href="route('listings.show', listing)">
                     <span class="block text-3xl font-bold">{{ listing.headline }}</span>
                     <Price :price="listing.price" class="text-2xl font-bold" />
                     <span class="text-xs p-2">

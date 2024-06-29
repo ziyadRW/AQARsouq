@@ -3,18 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Listing\Http\Controllers\ListingController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Public routes
+Route::get('listings', [ListingController::class, 'index'])->name('listings.index');
+Route::get('listings/{listing}', [ListingController::class, 'show'])->name('listings.show');
 
-Route::resource('listings', ListingController::class)->except(['create', 'store', 'edit', 'update']);
+// Authenticated routes
 Route::middleware('auth')->group(function () {
-    Route::resource('listings', ListingController::class)->only(['create', 'store', 'edit', 'update']);
+    Route::get('listings/create', [ListingController::class, 'create'])->name('listings.create');
+    Route::post('listings', [ListingController::class, 'store'])->name('listings.store');
+    Route::get('listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit');
+    Route::put('listings/{listing}', [ListingController::class, 'update'])->name('listings.update');
+    Route::post('listings/{listing}', [ListingController::class, 'destroy'])->name('listings.destroy');
+    Route::get('listings/manage', [ListingController::class, 'manage'])->name('listings.manage');
 });

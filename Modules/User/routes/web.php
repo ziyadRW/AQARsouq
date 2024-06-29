@@ -8,4 +8,6 @@ Route::middleware('web')->group(function () {
     Route::post('login', [UserController::class, 'auth'])->name('login.store');
     Route::get('signup', [UserController::class, 'create'])->name('user.create');
     Route::post('signup', [UserController::class, 'store'])->name('user.store');
+    Route::post('logout', [UserController::class, 'destroy'])->name('logout');
+
 });

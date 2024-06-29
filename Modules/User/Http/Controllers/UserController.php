@@ -48,8 +48,8 @@ class UserController extends Controller
         auth()->logout();
 
         $request->session()->invalidate();
-        $request->session()->regenerate();
+        $request->session()->regenerateToken();
 
-        return redirect()->route('listings.index');
+        return redirect()->route('listings.index')->with('success', 'Logged out successfully');
     }
 }

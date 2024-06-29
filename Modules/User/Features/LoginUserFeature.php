@@ -22,7 +22,7 @@ class LoginUserFeature
         ]);
 
         if ($this->userRepository->loginUser($credentials)) {
-            return redirect()->intended('dashboard')->with('success', 'Logged in successfully');
+            return redirect()->intended(route('listings.store'))->with('success', 'Logged in successfully');
         }
 
         return back()->withErrors([
